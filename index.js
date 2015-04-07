@@ -11,7 +11,7 @@ var
 * @author	Abel Vázquez
 * @version 1.0.0
 */
-turf.earcut = function(poly){
+module.exports = function(poly){
 
 	if (poly.geometry === void 0 || poly.geometry.type !== 'Polygon' ) throw('"earcut" only accepts polygon type input');
 
