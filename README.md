@@ -1,5 +1,7 @@
 # turf-tesselate
 
+[![build status](https://secure.travis-ci.org/Turfjs/turf-tesselate.png)](http://travis-ci.org/Turfjs/turf-tesselate)
+
 [Turf](http://turfjs.org/) tesselate module
 
 
