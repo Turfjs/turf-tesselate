@@ -31,7 +31,8 @@
   "devDependencies": {
     "dox": "^0.7.1",
     "doxme": "^1.8.2",
-    "tape": "^4.0.0"
+    "tape": "^4.0.0",
+    "turf-point": "^2.0.1"
   },
   "dependencies": {
     "earcut": "^2.0.0",

@@ -18,13 +18,29 @@ var earcut = require('earcut');
  */
 
 module.exports = function(poly){
-  if (!poly.geometry || poly.geometry.type !== 'Polygon' ) throw('input must be a polygon');
+  if (!poly.geometry || (poly.geometry.type !== 'Polygon' && poly.geometry.type !== 'MultiPolygon')) {
+    throw('input must be a Polygon or MultiPolygon');
+  }
 
-  var data = flattenCoords(poly.geometry.coordinates);
+  var fc = featurecollection([]);
+
+  if (poly.geometry.type === 'Polygon') {
+    fc.features = processPolygon(poly.geometry.coordinates);
+  } else {
+    poly.geometry.coordinates.forEach(function(coordinates){
+      fc.features = fc.features.concat(processPolygon(coordinates));
+    });
+  }
+  
+  return fc;
+};
+
+function processPolygon (coordinates) {
+  var data = flattenCoords(coordinates);
   var dim = 2;
   var result = earcut(data.vertices, data.holes, dim);
 
-  var fc = featurecollection([]);
+  var features = [];
   var vertices = [];
   result.forEach(function(vert, i){
     var index = result[i];
@@ -34,26 +50,26 @@ module.exports = function(poly){
   for (var i = 0; vertices && i < vertices.length; i += 3) {
     var coords = vertices.slice(i, i + 3);
     coords.push(vertices[i]);
-    fc.features.push(polygon([coords]));
+    features.push(polygon([coords]));
   }
   
-  return fc;
-};
+  return features;
+}
 
 function flattenCoords(data) {
-    var dim = data[0][0].length,
-        result = {vertices: [], holes: [], dimensions: dim},
-        holeIndex = 0;
+  var dim = data[0][0].length,
+    result = {vertices: [], holes: [], dimensions: dim},
+    holeIndex = 0;
 
-    for (var i = 0; i < data.length; i++) {
-        for (var j = 0; j < data[i].length; j++) {
-            for (var d = 0; d < dim; d++) result.vertices.push(data[i][j][d]);
-        }
-        if (i > 0) {
-            holeIndex += data[i - 1].length;
-            result.holes.push(holeIndex);
-        }
+  for (var i = 0; i < data.length; i++) {
+    for (var j = 0; j < data[i].length; j++) {
+      for (var d = 0; d < dim; d++) result.vertices.push(data[i][j][d]);
     }
+    if (i > 0) {
+      holeIndex += data[i - 1].length;
+      result.holes.push(holeIndex);
+    }
+  }
 
-    return result;
+  return result;
 }
