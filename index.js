@@ -3,7 +3,7 @@ var polygon = require('turf-polygon');
 var earcut = require('earcut');
 
 /**
- * Tesselates a {@link Feature<Polygon>} into a {@link FeatureCollection<Polygon>} of triangles using [earcut.js]{@link https://github.com/mapbox/earcut}
+ * Tesselates a {@link Feature<Polygon>} into a {@link FeatureCollection<Polygon>} of triangles using [earcut.js](@link https://github.com/mapbox/earcut)
  * coordinate array. Properties can be added optionally.
  *
  * @module turf/geometrycollection

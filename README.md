@@ -7,7 +7,7 @@
 
 ### `turf.geometrycollection(polygon)`
 
-Tesselates a Feature into a FeatureCollection of triangles using [earcut.js]https://github.com/mapbox/earcut
+Tesselates a Feature into a FeatureCollection of triangles using [earcut.js](@link https://github.com/mapbox/earcut)
 coordinate array. Properties can be added optionally.
 
 
