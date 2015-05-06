@@ -4,8 +4,7 @@ var earcut = require('earcut');
 
 /**
  * Tesselates a {@link Feature<Polygon>} into a {@link FeatureCollection<Polygon>} of triangles 
- * using [earcut.js](https://github.com/mapbox/earcut).
- * Properties can be added optionally.
+ * using [earcut](https://github.com/mapbox/earcut).
  *
  * @module turf/geometrycollection
  * @category misc
