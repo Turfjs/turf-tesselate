@@ -5,7 +5,7 @@
 [Turf](http://turfjs.org/) tesselate module
 
 
-### `turf.geometrycollection(polygon)`
+### `turf.tesselate(polygon)`
 
 Tesselates a Feature into a FeatureCollection of triangles 
 using [earcut](https://github.com/mapbox/earcut).
